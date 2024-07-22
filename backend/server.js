@@ -9,7 +9,8 @@ const port = process.env.PORT || 1235;
 const app = express();
 connectDB();
 dotenv.config();
-
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use("/api/users", userRoutes);
 
 app.get("/", (req, res) => res.send("Ready for requests"));
