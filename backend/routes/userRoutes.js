@@ -7,10 +7,14 @@ import {
   getUser,
   updateUser,
 } from "../controllers/userController.js";
+import { protectedRoute } from "../middleware/authMiddleware.js";
 
 router.post("/", registerUser);
 router.post("/auth", authUser);
 router.post("/logout", logoutUser);
-router.route("/profile").get(getUser).put(updateUser);
+router
+  .route("/profile")
+  .get(protectedRoute, getUser)
+  .put(protectedRoute, updateUser);
 
 export default router;
